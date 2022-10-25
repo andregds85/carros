@@ -10,7 +10,6 @@
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         
-        
 </head>
 
 <nav class="navbar navbar-expand-xl navbar-dark bg-dark box-shadow fixed-top">
@@ -22,6 +21,7 @@
       </ul>
     </div>
   </nav>
+     
 
 
 <?php
@@ -38,6 +38,8 @@
         exit('success');
     }
 ?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -55,81 +57,62 @@
 				<table class="table table-stripped table-hover table-bordered">
 					<thead>
 						<tr>
-							<td>Sistema de Fila</td>
+							<td>Usuarios do Sistema </td>
 						</tr>
 					</thead>
-					<tbody>
-						<?php
-							$sql = $conn->query("SELECT id, name, position FROM country ORDER BY position");
-							while($data = $sql->fetch_array()) {
-							    echo '
-							        <tr data-index="'.$data['id'].'" data-position="'.$data['position'].'">
-							            <td>'.$data['name'].'</td>
-                                        <td>'.$data['position'].'</td>
-							        </tr>
-							    ';
-                            }
-						?>
-					</tbody>
+				
 				</table>
+
+<div class="container">
+
+        <div class="row">
+    <form class="col s12" method="post" action="validaCadastro.php">
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Nome" name="nome" id="first_name" type="text" class="validate">
+          <label for="first_name">Nome</label>
+        </div>
+        <div class="input-field col s6">
+          <input placeholder="Sobrenome" name="sobrenome" id="first_name" type="text" class="validate">
+          <label for="first_name">sobrenome</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" name="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" name="senha" type="password" class="validate">
+          <label for="password">Senha</label>
+        </div>
+      </div>
+  
+      <button class="btn waves-effect waves-light" type="submit" name="action">Cadastrar
+        <i class="material-icons right">Usuario</i>
+      </button>
+
+
+
+    </form>
+  </div>
+
+  </div>
+
+
+
+
+
+
 			</div>
 		</div>
 	</div>
-
-    <script
-            src="http://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-    <script
-            src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-            crossorigin="anonymous"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-           $('table tbody').sortable({
-               update: function (event, ui) {
-                   $(this).children().each(function (index) {
-                        if ($(this).attr('data-position') != (index+1)) {
-                            $(this).attr('data-position', (index+1)).addClass('updated');
-                        }
-                   });
-
-                   saveNewPositions();
-               }
-           });
-        });
-
-        function saveNewPositions() {
-            var positions = [];
-            $('.updated').each(function () {
-               positions.push([$(this).attr('data-index'), $(this).attr('data-position')]);
-               $(this).removeClass('updated');
-            });
-
-            $.ajax({
-               url: 'main.php',
-               method: 'POST',
-               dataType: 'text',
-               data: {
-                   update: 1,
-                   positions: positions
-               }, success: function (response) {
-                    console.log(response);
-               }
-            });
-        }
-    </script>
-
-<body>
-
-<!--JavaScript at end of body for optimized loading-->
-
-
+  <body>
 
 </body>
-
-
 <footer class="page-footer bg-dark box-shadow">
           <div class="container">
             <div class="row">
@@ -140,7 +123,7 @@
               <div class="col l4 offset-l2 s12">
                 <ul>
                   <li><a class="grey-text text-lighten-3" href="main.php">Inicio</a></li>
-                  <li><a class="grey-text text-lighten-3" href="usuarios.php">Usuarios</a></li>
+                  <li><a class="grey-text text-lighten-3" href="usuarios.php">usuarios</a></li>
                   <li><a class="grey-text text-lighten-3" href="sair.php">Sair</a></li>
                 </ul>
               </div>
